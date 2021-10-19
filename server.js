@@ -1,11 +1,27 @@
 const express = require("express");
 const app = express();
-const Port = process.env.PORT || 5000;
+const cors = require("cors");
+
+require("./Config/Database");
+const Port = process.env.PORT || 3000;
+
+// Global Level Middlewares
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json());
+
+//Importing Routes
+const contactRoute = require("./Routes/Contact.Route");
+
+//Configuire Routes
+app.use("/api/v1", contactRoute);
 
 app.get("/", (req, res) => {
-  res.send("Fuck Heroku");
+  res.status(200).json({
+    success: true,
+    msg: "Welcome",
+  });
 });
 
 app.listen(Port, () => {
-  console.log("Server At 5000");
+  console.log("Server is up and running at 3000 🚀 ");
 });
