@@ -6,7 +6,7 @@ require("./Config/Database");
 const Port = process.env.PORT || 3000;
 
 // Global Level Middlewares
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors());
 app.use(express.json());
 
 //Importing Routes
